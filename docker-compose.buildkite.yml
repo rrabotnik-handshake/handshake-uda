@@ -1,0 +1,17 @@
+version: "3"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ci/Dockerfile.tests
+    volumes:
+      - ./:/app
+    environment:
+      - ENV=development
+      - BUF_USER
+      - BUF_TOKEN
+  lint:
+    image: us-central1-docker.pkg.dev/handshake-build/container-base-images/python:3.11-debian
+    build:
+      context: .
+      dockerfile: ci/Dockerfile.lint

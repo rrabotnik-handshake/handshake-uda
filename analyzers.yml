@@ -1,0 +1,14 @@
+# Python analyzers configuration
+
+analyzers:
+  # Add Python-specific analyzers here
+  # Example:
+  # "SQL Injection":
+  #   doc: "CWE-89: SQL Injection"
+  #   message: "Danger: possible SQL injection detected"
+  #   vuln_calls:
+  #     "some_python_package":
+  #       - "execute"
+
+sources:
+  # Add Python-specific sources here
