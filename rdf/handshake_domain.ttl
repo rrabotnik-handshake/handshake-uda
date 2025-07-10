@@ -1,0 +1,247 @@
+@prefix dom: <https://rdf.joinhandshake.com/domain#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix upper: <https://rdf.joinhandshake.com/upper#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+################################################################################
+# ENTITIES
+################################################################################
+
+dom:JobSeeker a upper:DirectClass ;
+    rdfs:label "Job Seeker" ;
+    rdfs:comment "Represents an individual looking for employment opportunities." ;
+    upper:property dom:fullName,
+                   dom:email,
+                   dom:graduationYear,
+                   dom:hasSkill,
+                   dom:attendedSchool .
+
+dom:Employer a upper:DirectClass ;
+    rdfs:label "Employer" ;
+    rdfs:comment "An organization or individual that posts job opportunities." ;
+    upper:property dom:employerName,
+                   dom:industry,
+                   dom:postedJob .
+
+dom:Job a upper:DirectClass ;
+    rdfs:label "Job" ;
+    rdfs:comment "A position or opportunity posted by an employer." ;
+    upper:property dom:title,
+                   dom:description,
+                   dom:location,
+                   dom:postedDate,
+                   dom:requiresSkill,
+                   dom:postedBy,
+                   dom:jobType .
+
+dom:Application a upper:DirectClass ;
+    rdfs:label "Application" ;
+    rdfs:comment "A record of a job seeker applying to a specific job." ;
+    upper:property dom:applicationStatus,
+                   dom:appliedDate .
+
+dom:School a upper:DirectClass ;
+    rdfs:label "School" ;
+    rdfs:comment "An educational institution attended by job seekers." ;
+    upper:property dom:schoolName,
+                   dom:schoolLocation .
+
+dom:Skill a upper:DirectClass ;
+    rdfs:label "Skill" ;
+    rdfs:comment "A capability or area of expertise possessed by a job seeker or required by a job." ;
+    upper:property dom:skillLabel,
+                   dom:skillCategory .
+
+################################################################################
+# ATTRIBUTES
+################################################################################
+
+dom:fullName a upper:Attribute ;
+    rdfs:label "Full Name" ;
+    rdfs:comment "The complete name of the job seeker." ;
+    upper:datatype xsd:string ;
+    upper:minLength 3 ;
+    upper:maxLength 100 ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+dom:email a upper:Attribute ;
+    rdfs:label "Email" ;
+    rdfs:comment "The email address of the job seeker." ;
+    upper:datatype xsd:string ;
+    upper:group "Contact Info" ;
+    upper:minLength 5 ;
+    upper:maxLength 255 ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+dom:graduationYear a upper:Attribute ;
+    rdfs:label "Graduation Year" ;
+    rdfs:comment "The year the job seeker graduated or expects to graduate." ;
+    upper:datatype xsd:gYear ;
+    upper:minInclusive 2000 ;
+    upper:maxInclusive 2035 ;
+    upper:minCount 1 ;
+    upper:maxCount 1 ;
+    upper:deprecated true .
+
+dom:employerName a upper:Attribute ;
+    rdfs:label "Employer Name" ;
+    rdfs:comment "The name of the employer organization." ;
+    upper:datatype xsd:string ;
+    upper:minLength 2 ;
+    upper:maxLength 100 ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+dom:industry a upper:Attribute ;
+    rdfs:label "Industry" ;
+    rdfs:comment "The industry sector in which the employer operates." ;
+    upper:datatype xsd:string ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+dom:title a upper:Attribute ;
+    rdfs:label "Title" ;
+    rdfs:comment "The title or name of the job position." ;
+    upper:datatype xsd:string ;
+    upper:minLength 2 ;
+    upper:maxLength 150 ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+dom:description a upper:Attribute ;
+    rdfs:label "Description" ;
+    rdfs:comment "A description of the job role and responsibilities." ;
+    upper:datatype xsd:string ;
+    upper:minLength 10 ;
+    upper:maxLength 2000 ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+dom:location a upper:Attribute ;
+    rdfs:label "Location" ;
+    rdfs:comment "The geographic location where the job is based." ;
+    upper:datatype xsd:string ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+dom:postedDate a upper:Attribute ;
+    rdfs:label "Posted Date" ;
+    rdfs:comment "The date the job was posted." ;
+    upper:datatype xsd:date ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+dom:applicationStatus a upper:Attribute ;
+    rdfs:label "Application Status" ;
+    rdfs:comment "The current status of the job application." ;
+    upper:datatype dom:ApplicationStatus ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+dom:appliedDate a upper:Attribute ;
+    rdfs:label "Applied Date" ;
+    rdfs:comment "The date when the job application was submitted." ;
+    upper:datatype xsd:date ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+dom:schoolName a upper:Attribute ;
+    rdfs:label "School Name" ;
+    rdfs:comment "The name of the school attended by the job seeker." ;
+    upper:datatype xsd:string ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+dom:schoolLocation a upper:Attribute ;
+    rdfs:label "School Location" ;
+    rdfs:comment "The geographic location of the school." ;
+    upper:datatype xsd:string ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+dom:skillLabel a upper:Attribute ;
+    rdfs:label "Skill Label" ;
+    rdfs:comment "The name or label of a skill." ;
+    upper:datatype xsd:string ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+dom:skillCategory a upper:Attribute ;
+    rdfs:label "Skill Category" ;
+    rdfs:comment "The category or domain to which the skill belongs." ;
+    upper:datatype xsd:string ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+dom:jobType a upper:Attribute ;
+    rdfs:label "Job Type" ;
+    rdfs:comment "Indicates whether the job is full-time, part-time, etc." ;
+    upper:datatype dom:JobType ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+################################################################################
+# RELATIONSHIPS
+################################################################################
+
+dom:hasSkill a upper:Relationship ;
+    rdfs:label "Has Skill" ;
+    rdfs:comment "Indicates the skills possessed by the job seeker." ;
+    upper:class dom:Skill ;
+    upper:minCount 0 ;
+    upper:maxCount -1 .
+
+dom:attendedSchool a upper:Relationship ;
+    rdfs:label "Attended School" ;
+    rdfs:comment "Links the job seeker to the schools they attended." ;
+    upper:class dom:School ;
+    upper:minCount 0 ;
+    upper:maxCount -1 .
+
+dom:postedJob a upper:Relationship ;
+    rdfs:label "Posted Job" ;
+    rdfs:comment "Jobs posted by the employer." ;
+    upper:class dom:Job ;
+    upper:minCount 0 ;
+    upper:maxCount -1 .
+
+dom:postedBy a upper:Relationship ;
+    rdfs:label "Posted By" ;
+    rdfs:comment "The employer that posted the job." ;
+    upper:class dom:Employer ;
+    upper:minCount 1 ;
+    upper:maxCount 1 .
+
+dom:requiresSkill a upper:Relationship ;
+    rdfs:label "Requires Skill" ;
+    rdfs:comment "Skills required to be eligible for the job." ;
+    upper:class dom:Skill ;
+    upper:minCount 0 ;
+    upper:maxCount -1 .
+
+################################################################################
+# ENUMS
+################################################################################
+
+# OWL-based Enum
+dom:ApplicationStatus a rdfs:Class ;
+    rdfs:label "Application Status" ;
+    rdfs:comment "Possible outcomes of a job application." ;
+    owl:oneOf ( dom:Pending dom:Accepted dom:Rejected ) .
+
+dom:Pending a dom:ApplicationStatus ; rdfs:label "Pending" .
+dom:Accepted a dom:ApplicationStatus ; rdfs:label "Accepted" .
+dom:Rejected a dom:ApplicationStatus ; rdfs:label "Rejected" .
+
+# upper:Enumeration-based Enum
+dom:JobType a upper:Enumeration ;
+    rdfs:label "Job Type" ;
+    rdfs:comment "The type or nature of the job role." .
+
+dom:FULL_TIME  a dom:JobType ; rdfs:label "Full-Time" .
+dom:PART_TIME  a dom:JobType ; rdfs:label "Part-Time" .
+dom:INTERNSHIP a dom:JobType ; rdfs:label "Internship" .
+dom:CONTRACT   a dom:JobType ; rdfs:label "Contract" .

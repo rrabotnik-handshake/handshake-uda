@@ -1,0 +1,123 @@
+syntax = "proto3";
+package handshake.v1;
+option java_multiple_files = true;
+import "buf/validate/validate.proto";
+
+enum Jobtype {
+  // Default unspecified value
+  JOBTYPE_UNSPECIFIED = 0;
+  // Full-Time
+  JOBTYPE_FULL_TIME = 1;
+  // Part-Time
+  JOBTYPE_PART_TIME = 2;
+  // Internship
+  JOBTYPE_INTERNSHIP = 3;
+  // Contract
+  JOBTYPE_CONTRACT = 4;
+}
+
+enum Applicationstatus {
+  // Default unspecified value
+  APPLICATIONSTATUS_UNSPECIFIED = 0;
+  // Pending
+  APPLICATIONSTATUS_PENDING = 1;
+  // Accepted
+  APPLICATIONSTATUS_ACCEPTED = 2;
+  // Rejected
+  APPLICATIONSTATUS_REJECTED = 3;
+}
+
+message Application {
+
+  // === General ===
+  // Application Status
+  // The current status of the job application.
+  optional string application_status = 1;
+  // Applied Date
+  // The date when the job application was submitted.
+  optional string applied_date = 2;
+}
+
+message Employer {
+
+  // === General ===
+  // Employer Name
+  // The name of the employer organization.
+  optional string employer_name = 1 [(buf.validate.field).string.min_len = 2, (buf.validate.field).string.max_len = 100];
+  // Industry
+  // The industry sector in which the employer operates.
+  optional string industry = 2;
+  // Posted Job
+  // Jobs posted by the employer.
+  repeated Job posted_job = 3;
+}
+
+message Job {
+
+  // === General ===
+  // Title
+  // The title or name of the job position.
+  optional string title = 1 [(buf.validate.field).string.min_len = 2, (buf.validate.field).string.max_len = 150];
+  // Description
+  // A description of the job role and responsibilities.
+  optional string description = 2 [(buf.validate.field).string.min_len = 10, (buf.validate.field).string.max_len = 2000];
+  // Location
+  // The geographic location where the job is based.
+  optional string location = 3;
+  // Posted Date
+  // The date the job was posted.
+  optional string posted_date = 4;
+  // Requires Skill
+  // Skills required to be eligible for the job.
+  repeated Skill requires_skill = 5;
+  // Posted By
+  // The employer that posted the job.
+  optional Employer posted_by = 6;
+  // Job Type
+  // Indicates whether the job is full-time, part-time, etc.
+  optional string job_type = 7;
+}
+
+message JobSeeker {
+
+  // === Contact Info ===
+  // Email
+  // The email address of the job seeker.
+  optional string email = 1 [(buf.validate.field).string.min_len = 5, (buf.validate.field).string.max_len = 255];
+
+  // === General ===
+  // Full Name
+  // The complete name of the job seeker.
+  optional string full_name = 2 [(buf.validate.field).string.min_len = 3, (buf.validate.field).string.max_len = 100];
+  // Graduation Year
+  // The year the job seeker graduated or expects to graduate.
+  optional int32 graduation_year = 3 [(buf.validate.field).int32.gte = 2000, (buf.validate.field).int32.lte = 2035];
+  // Has Skill
+  // Indicates the skills possessed by the job seeker.
+  repeated Skill has_skill = 4;
+  // Attended School
+  // Links the job seeker to the schools they attended.
+  repeated School attended_school = 5;
+}
+
+message Skill {
+
+  // === General ===
+  // Skill Label
+  // The name or label of a skill.
+  optional string skill_label = 1;
+  // Skill Category
+  // The category or domain to which the skill belongs.
+  optional string skill_category = 2;
+}
+
+message School {
+
+  // === General ===
+  // School Name
+  // The name of the school attended by the job seeker.
+  optional string school_name = 1;
+  // School Location
+  // The geographic location of the school.
+  optional string school_location = 2;
+}

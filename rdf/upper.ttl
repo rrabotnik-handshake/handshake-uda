@@ -1,0 +1,78 @@
+@prefix upper: <https://rdf.joinhandshake.com/upper#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+# === Property constraints ===
+
+upper:minCount a rdf:Property ;
+    rdfs:label "Minimum Count" ;
+    rdfs:comment "Minimum number of times a property must occur." ;
+    rdfs:range xsd:integer .
+
+upper:maxCount a rdf:Property ;
+    rdfs:label "Maximum Count" ;
+    rdfs:comment "Maximum number of times a property may occur." ;
+    rdfs:range xsd:integer .
+
+upper:minLength a rdf:Property ;
+    rdfs:label "Minimum Length" ;
+    rdfs:comment "Minimum number of characters in a string." ;
+    rdfs:range xsd:integer .
+
+upper:maxLength a rdf:Property ;
+    rdfs:label "Maximum Length" ;
+    rdfs:comment "Maximum number of characters in a string." ;
+    rdfs:range xsd:integer .
+
+upper:minInclusive a rdf:Property ;
+    rdfs:label "Minimum Value (inclusive)" ;
+    rdfs:comment "Inclusive minimum value for numeric fields." ;
+    rdfs:range xsd:decimal .
+
+upper:maxInclusive a rdf:Property ;
+    rdfs:label "Maximum Value (inclusive)" ;
+    rdfs:comment "Inclusive maximum value for numeric fields." ;
+    rdfs:range xsd:decimal .
+
+# === Semantic grouping and lifecycle ===
+
+upper:group a rdf:Property ;
+    rdfs:label "Group" ;
+    rdfs:comment "Logical grouping for documentation or UI display." ;
+    rdfs:range xsd:string .
+
+upper:Deprecated a rdfs:Class ;
+    rdfs:label "Deprecated" ;
+    rdfs:comment "Indicates that the property is deprecated." .
+
+# === Core model types ===
+
+upper:DirectClass a rdfs:Class ;
+    rdfs:label "Direct Class" ;
+    rdfs:comment "A primary entity type in the domain model." .
+
+upper:Attribute a rdfs:Class ;
+    rdfs:label "Attribute" ;
+    rdfs:comment "A literal-valued property of an entity." .
+
+upper:Relationship a rdfs:Class ;
+    rdfs:label "Relationship" ;
+    rdfs:comment "A reference to another entity." .
+
+upper:Enumeration a rdfs:Class ;
+    rdfs:label "Enumeration" ;
+    rdfs:comment "An RDF class treated as an enum with discrete values." .
+
+upper:property a rdf:Property ;
+    rdfs:label "Property" ;
+    rdfs:comment "A property belonging to an entity." ;
+    rdfs:range rdf:Property .
+
+upper:datatype a rdf:Property ;
+    rdfs:label "Datatype" ;
+    rdfs:comment "XSD type or enum reference for the property." .
+
+upper:class a rdf:Property ;
+    rdfs:label "Class" ;
+    rdfs:comment "Target class for a relationship." .

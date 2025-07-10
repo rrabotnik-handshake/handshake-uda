@@ -1,0 +1,77 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.env/
+.venv/
+env/
+venv/
+poetry.lock
+
+# Python-specific
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+
+# RDF generated files or temp files
+*.ttl~
+*.bak
+*.swp
+.rdfstore/
+
+# Protobuf generated files
+*.pb.go
+*.pb.cc
+*.pb.h
+*.pb.c
+*.pb.h
+*.pb.o
+*.pb.py
+*.pyi
+
+# Descriptor sets
+*.protoset
+
+# Buf cache and generated artifacts
+buf.gen.yaml~
+buf.lock
+gen/
+build/
+dist/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Compiled Java files (if applicable)
+*.class
+*.jar
+*.war
+*.ear
+
+# Generated Java sources
+java/gen-java/
+
+# Node-related (if any front-end component exists)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Backup files
+*~
+
+# Test output
+htmlcov/
+coverage.xml
+.pytest_cache/
+.tox/
+nosetests.xml
+test-results.xml
