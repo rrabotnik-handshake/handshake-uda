@@ -178,11 +178,11 @@ for entity_name in reversed(sorted_entities):
                 if g.value(f, UPPER.minLength):
                     requires_validation_import = True
                     options.append(
-                        f"(buf.validate.field).string.min_len = {g.value(f, UPPER.minLength)}")
+                        f"(buf.validate.field).string.min_len = {int(str(g.value(f, UPPER.minLength)))}")
                 if g.value(f, UPPER.maxLength):
                     requires_validation_import = True
                     options.append(
-                        f"(buf.validate.field).string.max_len = {g.value(f, UPPER.maxLength)}")
+                        f"(buf.validate.field).string.max_len = {int(str(g.value(f, UPPER.maxLength)))}")
                 if g.value(f, UPPER.pattern):
                     requires_validation_import = True
                     options.append(
@@ -191,15 +191,21 @@ for entity_name in reversed(sorted_entities):
                 if g.value(f, UPPER.minInclusive):
                     requires_validation_import = True
                     options.append(
-                        f"(buf.validate.field).{f_type}.gte = {g.value(f, UPPER.minInclusive)}")
+                        f"(buf.validate.field).{f_type}.gte = {int(str(g.value(f, UPPER.minInclusive)))}")
                 if g.value(f, UPPER.maxInclusive):
                     requires_validation_import = True
                     options.append(
-                        f"(buf.validate.field).{f_type}.lte = {g.value(f, UPPER.maxInclusive)}")
-            option_str = f" [{', '.join(options)}]" if options else ""
-            proto_lines.append(
-                f"  {modifier} {f_type} {to_snake_case(local_name(f))} = {idx}{option_str};")
-            idx += 1
+                        f"(buf.validate.field).{f_type}.lte = {int(str(g.value(f, UPPER.maxInclusive)))}")
+            if str(min_count) and int(str(min_count)) >= 1:
+                requires_validation_import = True
+                if modifier == "repeated":
+                    options.append("(buf.validate.field).repeated.min_items = 1")
+                else:
+                    options.append("(buf.validate.field).required = true")
+        option_str = f" [{', '.join(options)}]" if options else ""
+        proto_lines.append(
+            f"  {modifier} {f_type} {to_snake_case(local_name(f))} = {idx}{option_str};")
+        idx += 1
     proto_lines.append("}\n")
 
 # Add imports

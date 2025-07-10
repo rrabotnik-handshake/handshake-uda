@@ -2,8 +2,8 @@ from rdflib import Graph, Namespace, RDF, RDFS, URIRef
 
 # Load the RDF data
 g = Graph()
-g.parse("../rdf/upper.ttl", format="turtle")
-g.parse("../rdf/handshake_domain.ttl", format="turtle")
+g.parse("./rdf/upper.ttl", format="turtle")
+g.parse("./rdf/handshake_domain.ttl", format="turtle")
 
 UPPER = Namespace("https://rdf.joinhandshake.com/upper#")
 DOM = Namespace("https://rdf.joinhandshake.com/domain#")
