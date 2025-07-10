@@ -1,0 +1,11 @@
+FROM us-central1-docker.pkg.dev/handshake-build/container-base-images/python:3.11-debian as test
+
+WORKDIR /app
+
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir --upgrade pip \
+  && pip install --no-cache-dir flake8 black
+
+COPY . /app/
+
+CMD ["bash", "ci/lint.sh"]

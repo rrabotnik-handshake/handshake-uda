@@ -1,0 +1,53 @@
+steps:
+  - name: ":python: Tests"
+    command: "./ci/tests.sh"
+    artifact_paths: "coverage/**/*"
+    agents:
+      queue: ${QUEUE_ELASTIC}
+    plugins:
+      - docker-compose#v4.16.0:
+          run: app
+          config: docker-compose.buildkite.yml
+      - docker-login#v2.2.0:
+          server: us-central1-docker.pkg.dev
+          username: _json_key
+          password-env: GCR_PASSWORD
+    timeout_in_minutes: 5
+
+  - name: ":python: Lint"
+    command: "./ci/lint.sh"
+    agents:
+      queue: ${QUEUE_ELASTIC}
+    plugins:
+      - docker-compose#v4.16.0:
+          run: lint
+          config: docker-compose.buildkite.yml
+      - docker-login#v2.2.0:
+          server: us-central1-docker.pkg.dev
+          username: _json_key
+          password-env: GCR_PASSWORD
+    timeout_in_minutes: 5
+
+  # Wait here, don't build unless we pass tests
+  - wait
+
+  - name: ":docker: Build Production"
+    command: "./ci/build-production-image.sh"
+    agents:
+      queue: ${QUEUE_DOCKER_BUILDER}
+    plugins:
+      docker-login#v2.2.0:
+        server: us-central1-docker.pkg.dev
+        username: _json_key
+        password-env: GCR_PASSWORD
+    artifact_paths: "*.log"
+    timeout_in_minutes: 20
+
+  - trigger: "code-coverage-service"
+    async: true
+    build:
+      message: "${BUILDKITE_MESSAGE}"
+      env:
+        TRIGGER_BUILDKITE_PULL_REQUEST: "${BUILDKITE_PULL_REQUEST}"
+        TRIGGER_BUILDKITE_PULL_REQUEST_REPO: "${BUILDKITE_PULL_REQUEST_REPO}"
+    label: "Run Code Coverage Microservice Pipeline"

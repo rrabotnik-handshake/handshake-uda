@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# strip out all special characters
+export BRANCH_SLUG=$(echo "$BUILDKITE_BRANCH" | sed 's/[^a-zA-Z0-9]/-/g')

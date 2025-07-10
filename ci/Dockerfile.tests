@@ -1,0 +1,12 @@
+FROM us-central1-docker.pkg.dev/handshake-build/container-base-images/python:3.11-debian as test
+
+WORKDIR /app
+
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir --upgrade pip \
+  && pip install --no-cache-dir -r requirements.txt \
+  && pip install --no-cache-dir pytest pytest-cov flake8 black
+
+COPY . /app/
+
+CMD ["pytest", "--cov=.", "--cov-report=term", "--cov-report=xml:coverage/coverage.xml"]

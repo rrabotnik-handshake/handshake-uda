@@ -1,0 +1,13 @@
+machine:
+  environment:
+    KUBE_APP_NAME: REPLACE_WITH_SERVICE_NAME
+    KUBE_CLUSTER: production
+    GITHUB_REPO_NAME: REPLACE_WITH_SERVICE_NAME
+    DISABLE_SCHEMA_MIGRATIONS: "true"
+    USE_ARGOCD: "true"
+
+ci:
+  require:
+    - shipit/staging
+  hide:
+    - shipit/eu-staging
