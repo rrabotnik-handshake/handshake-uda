@@ -75,3 +75,6 @@ coverage.xml
 .tox/
 nosetests.xml
 test-results.xml
+
+# Test Files
+*test_rr*
