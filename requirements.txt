@@ -1,5 +1,5 @@
-bufbuild-protovalidate-protocolbuffers-pyi==31.0.0.1.20250423154025+7712fb530c57
-bufbuild-protovalidate-protocolbuffers-python==31.0.0.1.20250423154025+7712fb530c57
+# bufbuild-protovalidate-protocolbuffers-pyi==31.0.0.1.20250423154025+7712fb530c57
+# bufbuild-protovalidate-protocolbuffers-python==31.0.0.1.20250423154025+7712fb530c57
 cel-python==0.2.0
 jmespath==1.0.1
 lark==0.12.0

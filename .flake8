@@ -1,9 +1,0 @@
-# http://flake8.pycqa.org/en/latest/user/configuration.html
-
-[flake8]
-max-line-length = 160
-ignore = BLK100, W503
-select = C,E,F,W,B,B950
-extend-ignore = E203, E501, E704
-exclude = 
-  .venv/

@@ -88,16 +88,6 @@ message JobSeeker {
   repeated School attended_school = 2;
 }
 
-message School {
-
-  // === General ===
-  // School Name
-  // The name of the school attended by the job seeker.
-  // School Location
-  // The geographic location of the school.
-  optional string school_location = 1 [(buf.validate.field).required = true];
-}
-
 message Skill {
 
   // === General ===
@@ -106,4 +96,14 @@ message Skill {
   // Skill Category
   // The category or domain to which the skill belongs.
   optional string skill_category = 1 [(buf.validate.field).required = true];
+}
+
+message School {
+
+  // === General ===
+  // School Name
+  // The name of the school attended by the job seeker.
+  // School Location
+  // The geographic location of the school.
+  optional string school_location = 1 [(buf.validate.field).required = true];
 }
