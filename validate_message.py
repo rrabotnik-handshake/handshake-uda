@@ -2,5 +2,6 @@
 import protovalidate
 
 
-def validateMessage(request):
+def validate_message(request):
+    # pass
     protovalidate.validate(request)

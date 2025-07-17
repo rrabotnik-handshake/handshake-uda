@@ -1,11 +1,12 @@
 version: v2
 modules:
-  - path: proto
+  - path: gen/proto
 deps:
   - buf.build/bufbuild/protovalidate:v0.13.0
 lint:
   use:
     - STANDARD
+#    - COMMENTS
 breaking:
   use:
     - FILE
